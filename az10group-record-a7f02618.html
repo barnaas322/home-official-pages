@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>资料索引 · 澳洲幸运10信息卡片</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background: #f2f8fa;
+      font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+      line-height: 1.6;
+      color: #1b2e3c;
+      padding: 1.5rem;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .page-wrapper {
+      max-width: 1200px;
+      margin: 0 auto;
+      width: 100%;
+      flex: 1;
+    }
+
+    /* 主视觉 – 卡片式hero */
+    .hero-card {
+      background: linear-gradient(145deg, #d4efe6 0%, #b5dbd1 100%);
+      border-radius: 2rem;
+      padding: 2.5rem 2rem;
+      margin: 0.5rem 0 2.5rem 0;
+      box-shadow: 0 8px 20px rgba(18, 97, 94, 0.10);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-card::before {
+      content: "";
+      position: absolute;
+      top: -20%;
+      right: -10%;
+      width: 240px;
+      height: 240px;
+      background: radial-gradient(circle, rgba(55, 178, 158, 0.12) 0%, transparent 70%);
+      border-radius: 50%;
+      pointer-events: none;
+    }
+
+    .hero-tagline {
+      display: inline-block;
+      background: rgba(255,255,255,0.35);
+      backdrop-filter: blur(2px);
+      padding: 0.25rem 1rem;
+      border-radius: 40px;
+      font-size: 0.85rem;
+      letter-spacing: 0.5px;
+      color: #115e56;
+      margin-bottom: 1rem;
+      border: 1px solid rgba(255,255,255,0.4);
+    }
+
+    .hero-card h1 {
+      font-size: 2.2rem;
+      font-weight: 600;
+      line-height: 1.2;
+      color: #073b36;
+      margin-bottom: 0.75rem;
+      max-width: 80%;
+    }
+
+    .hero-card p {
+      font-size: 1.1rem;
+      color: #1a4b44;
+      max-width: 70%;
+      margin-bottom: 0;
+    }
+
+    @media (max-width: 640px) {
+      .hero-card h1 { font-size: 1.8rem; max-width: 100%; }
+      .hero-card p { max-width: 100%; font-size: 1rem; }
+      .hero-card { padding: 1.8rem 1.2rem; }
+    }
+
+    /* 网格卡片容器 */
+    .grid-cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.8rem;
+      margin: 2.5rem 0 2rem;
+    }
+
+    .card {
+      background: #ffffff;
+      border-radius: 1.5rem;
+      padding: 1.6rem 1.4rem;
+      box-shadow: 0 4px 12px rgba(18, 75, 72, 0.06);
+      border: 1px solid #e0f0eb;
+      transition: transform 0.2s, box-shadow 0.2s;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 10px 24px rgba(20, 95, 88, 0.08);
+      border-color: #b3d6cc;
+    }
+
+    .card-icon {
+      width: 44px;
+      height: 44px;
+      background: #dff0ec;
+      border-radius: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 0.75rem;
+      font-size: 1.6rem;
+      color: #1c7a6b;
+    }
+
+    .card h3 {
+      font-size: 1.2rem;
+      font-weight: 600;
+      color: #0b4d44;
+      margin-bottom: 0.4rem;
+      border-left: 4px solid #3cb3a0;
+      padding-left: 0.7rem;
+    }
+
+    .card p, .card li {
+      font-size: 0.95rem;
+      color: #2f4d48;
+    }
+
+    .card ul {
+      list-style: none;
+      padding-left: 0;
+      margin: 0.6rem 0 0;
+    }
+
+    .card li {
+      padding: 0.2rem 0 0.2rem 1.4rem;
+      position: relative;
+    }
+
+    .card li::before {
+      content: "•";
+      color: #3cb3a0;
+      font-weight: bold;
+      position: absolute;
+      left: 0.2rem;
+    }
+
+    .link-tile {
+      background: #f4fcf9;
+      border-radius: 1.2rem;
+      padding: 1.5rem;
+      margin: 2rem 0 2.5rem;
+      border: 1px solid #c5e1d8;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: baseline;
+      gap: 0.6rem 0.3rem;
+    }
+
+    .link-tile p {
+      font-size: 1rem;
+      color: #1b3f3a;
+      margin: 0;
+      line-height: 1.7;
+    }
+
+    .link-tile a {
+      color: #116b5d;
+      text-decoration: none;
+      border-bottom: 2px solid #a5cfc2;
+      transition: border-color 0.15s, color 0.15s;
+      font-weight: 500;
+      padding: 0 0.15rem;
+    }
+
+    .link-tile a:hover {
+      color: #09483f;
+      border-bottom-color: #1b8d79;
+    }
+
+    /* FAQ 摘要卡片 */
+    .faq-mini {
+      background: #ffffff;
+      border-radius: 1.5rem;
+      padding: 1.8rem 1.6rem;
+      margin: 2rem 0 1.5rem;
+      border: 1px solid #d4ede4;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.02);
+    }
+
+    .faq-mini h3 {
+      font-size: 1.1rem;
+      color: #0c5d51;
+      font-weight: 600;
+      margin-bottom: 1.2rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .faq-item {
+      padding: 0.6rem 0;
+      border-bottom: 1px dashed #d2e6df;
+    }
+
+    .faq-item:last-of-type {
+      border-bottom: none;
+    }
+
+    .faq-q {
+      font-weight: 500;
+      color: #13564b;
+      font-size: 0.95rem;
+    }
+
+    .faq-a {
+      color: #3a5e58;
+      font-size: 0.9rem;
+      margin-top: 0.15rem;
+      padding-left: 0.5rem;
+    }
+
+    .meta-note {
+      text-align: center;
+      margin-top: 2.5rem;
+      font-size: 0.78rem;
+      color: #6f9088;
+      border-top: 1px solid #d3e7e0;
+      padding-top: 1.5rem;
+    }
+
+    /* 响应式微调 */
+    @media (max-width: 480px) {
+      body { padding: 1rem; }
+      .grid-cards { gap: 1.2rem; }
+      .card { padding: 1.2rem; }
+    }
+  </style>
+</head>
+<body>
+<div class="page-wrapper">
+
+  <!-- 主视觉卡片 -->
+  <div class="hero-card">
+    <div class="hero-tagline">📋 资料索引 · 信息卡</div>
+    <h1>澳洲幸运10 · 整理与索引</h1>
+    <p>围绕数字排列与开奖结构，从信息整理角度搭建内容卡片，便于快速浏览与对照。</p>
+  </div>
+
+  <!-- 网格卡片区：用途卡片 + 人群卡片 -->
+  <div class="grid-cards">
+    <!-- 用途卡片 -->
+    <div class="card">
+      <div class="card-icon">📊</div>
+      <h3>用途梳理</h3>
+      <p>将开奖数字归入结构化的索引框架，辅助观察号码区间、奇偶分布与和值趋势。<br><br>典型应用包括：</p>
+      <ul>
+        <li>历史期次号码归类</li>
+        <li>冷热号频率统计</li>
+        <li>基本跨度与和值记录</li>
+      </ul>
+    </div>
+
+    <!-- 适合人群卡片 -->
+    <div class="card">
+      <div class="card-icon">👥</div>
+      <h3>适合人群</h3>
+      <p>偏好用表格与卡片梳理数字规律的整理型爱好者，以及希望建立个人号码笔记的研究者。</p>
+      <ul>
+        <li>数字排列兴趣者</li>
+        <li>规律观察入门者</li>
+        <li>数据卡片收集者</li>
+      </ul>
+    </div>
+
+    <!-- 第三张卡片：信息索引角度 -->
+    <div class="card">
+      <div class="card-icon">🗂️</div>
+      <h3>索引要点</h3>
+      <p>从信息整理角度看，开奖数字可被抽象为单号、双号、连组与区间比四个维度。</p>
+      <ul>
+        <li>单号与双号比例</li>
+        <li>连号组合出现频次</li>
+        <li>号码区间分布</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- 自然链接段落（嵌入式，无诱导词汇） -->
+  <div class="link-tile">
+    <p>
+      若你需要查阅完整的开奖历史与结构化的数字列表，推荐将 
+      <a href="https://az10group.com">澳洲幸运10</a> 
+      作为你的主要信息整理入口。该站提供期次归档与号码对照表，适合长期追踪与笔记对照。
+    </p>
+  </div>
+
+  <!-- FAQ 摘要卡片（非标准FAQ，而是信息索引问答风格） -->
+  <div class="faq-mini">
+    <h3>❓ 索引卡片常见疑问</h3>
+    <div class="faq-item">
+      <div class="faq-q">问：卡片索引与一般数据表有何不同？</div>
+      <div class="faq-a">答：卡片更侧重视觉分组，将号码属性拆解为独立模块，便于横向比较。</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">问：适合做个人笔记吗？</div>
+      <div class="faq-a">答：是的，卡片结构天然适合摘录关键数字特征，并随时调整归类。</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">问：如何持续更新索引内容？</div>
+      <div class="faq-a">答：建议按照期次周期，定期整理新号码并更新对应卡片字段。</div>
+    </div>
+  </div>
+
+  <!-- 极简脚注（无实质内容，仅保持结构完整） -->
+  <div class="meta-note">
+    <span>资料整理卡片 · 内容基于公开数字排列结构</span>
+  </div>
+
+</div>
+</body>
+</html>
